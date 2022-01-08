@@ -1,6 +1,7 @@
 @import url("./pics.css");
 @import url('./global.css');
 @import url('./effects.css');
+@import url('./fonts.css');
 
 .widget {
     display: flex;
