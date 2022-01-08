@@ -1,0 +1,39 @@
+.widget {
+    display: flex;
+    width: 800px;
+    border: 1px solid black;
+    padding: 20px;
+}
+
+.task-wrapper, .buttons {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+}
+
+.task-wrapper{
+    width: 100%;
+}
+
+.task {
+    display: flex;
+    width: 65%;
+    padding: 10px;
+    flex-wrap: wrap;
+    border-right: 1px solid black;
+}
+
+.shortDescr{
+    width: 100%;
+    display:inline;
+
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.date{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
