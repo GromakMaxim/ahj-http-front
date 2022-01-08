@@ -1,7 +1,10 @@
-@import url("pics.css");
+@import url("./pics.css");
+@import url('./global.css');
+@import url('./effects.css');
 
 .widget {
     display: flex;
+    flex-direction: column;
     width: 800px;
     border: 1px solid black;
     padding: 20px;
@@ -15,6 +18,7 @@
 
 .task-wrapper {
     width: 100%;
+    margin-bottom: 10px;
 }
 
 .task {

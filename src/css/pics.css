@@ -1,6 +1,6 @@
 .buttons {
     display: flex;
-    width: 12%;
+    margin: auto;
 }
 
 .edit {
