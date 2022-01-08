@@ -1,3 +1,15 @@
 .task-wrapper:hover {
     background-color: #E0FFFF;
 }
+
+.edit:hover{
+    background-image: url("../pics/edit_b.png");
+}
+
+.delete:hover{
+    background-image: url("../pics/delete_b.png");
+}
+
+.task:hover, .delete:hover, .edit:hover{
+    cursor: pointer;
+}
