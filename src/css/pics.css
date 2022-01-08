@@ -1,0 +1,22 @@
+.buttons {
+    display: flex;
+    width: 12%;
+}
+
+.edit {
+    background-image: url("../pics/edit_w.png");
+    background-size: 30px auto;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    margin: auto;
+}
+
+.delete {
+    background-image: url("../pics/delete_w.png");
+    background-size: 30px auto;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    margin: auto;
+}
