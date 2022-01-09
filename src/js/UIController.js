@@ -1,4 +1,5 @@
 import RequestSender from "./RequestSender";
+import TaskStatusHandler from "./TaskStatusHandler";
 
 export default class UIController {
 
@@ -39,7 +40,7 @@ export default class UIController {
 
         let status = document.createElement('div');
         status.classList.add('status');
-        status.textContent = 'Статус: ';
+        status.textContent = 'Статус: ' + TaskStatusHandler.parseStatus(taskData.status);
 
         let opened = document.createElement('div');
         opened.classList.add('opened');
