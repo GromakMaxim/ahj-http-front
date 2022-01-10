@@ -2,22 +2,26 @@
     background-color: #E0FFFF;
 }
 
-.edit:hover{
+.edit:hover {
     background-image: url("../pics/edit_b.png");
 }
 
-.delete:hover{
+.delete:hover {
     background-image: url("../pics/delete_b.png");
 }
 
-.task:hover, .delete:hover, .edit:hover{
+.task:hover, .delete:hover, .edit:hover {
     cursor: pointer;
 }
 
-.task-short-content:focus, .task-content:focus{
+.task-short-content:focus, .task-content:focus {
     border: 3px solid black;
 }
 
-#confirm-task-changes:hover, #exit:hover{
+#confirm-task-changes:hover, #exit:hover {
     font-weight: 700;
+}
+
+#confirm-task-changes:hover {
+    margin-right: 144px;
 }
