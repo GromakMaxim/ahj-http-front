@@ -1,20 +1,25 @@
 import RequestSender from "./RequestSender";
 import TaskStatusHandler from "./TaskStatusHandler";
 import DateHandler from "./DateHandler";
+import InteractionController from "./InteractionController";
 
 export default class UIController {
 
     constructor() {
+        this.interaction = new InteractionController();
         this.api = new RequestSender();
+        this.api.getAllTasks()
+            .then(
+                result => {
+                    this.showAllTickets(result);
+                    this.interaction.setOpenTaskFunction();
+                }
+            )
     }
 
-    getAllTasks() {
-        this.api.getAllTasks().then(
-            result => this.showAllTickets(result)
-        );
-    }
 
     showAllTickets(tasks) {
+        console.log(tasks)
         const widget = document.getElementsByClassName('widget')[0];
         for (let taskData of tasks) {
             const elem = this.buildTask(taskData);
@@ -28,6 +33,7 @@ export default class UIController {
 
         let task = document.createElement('div');
         task.classList.add('task');
+        task.id = taskData.id;
 
 
         let short = document.createElement('span');
