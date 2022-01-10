@@ -13,3 +13,11 @@
 .task:hover, .delete:hover, .edit:hover{
     cursor: pointer;
 }
+
+.task-short-content:focus, .task-content:focus{
+    border: 3px solid black;
+}
+
+#confirm-task-changes:hover, #exit:hover{
+    font-weight: 700;
+}
