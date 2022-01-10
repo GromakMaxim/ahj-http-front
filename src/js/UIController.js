@@ -1,5 +1,6 @@
 import RequestSender from "./RequestSender";
 import TaskStatusHandler from "./TaskStatusHandler";
+import DateHandler from "./DateHandler";
 
 export default class UIController {
 
@@ -44,11 +45,11 @@ export default class UIController {
 
         let opened = document.createElement('div');
         opened.classList.add('opened');
-        opened.textContent = 'Открыт: ';
+        opened.textContent = 'Открыт: ' + DateHandler.getBeautifulDate(taskData.creationDate);
 
         let estimate = document.createElement('div');
         estimate.classList.add('estimate');
-        estimate.textContent = 'Срок, до: ';
+        estimate.textContent = 'Срок, до: ' + DateHandler.getBeautifulDate(taskData.closingDate);
 
         date.append(status);
         date.append(opened);
