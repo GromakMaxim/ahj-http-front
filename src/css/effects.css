@@ -25,3 +25,7 @@
 #confirm-task-changes:hover {
     margin-right: 144px;
 }
+
+.dropdown-content p:hover{
+    background-color: #E0FFFF;
+}

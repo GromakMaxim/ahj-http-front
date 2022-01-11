@@ -36,10 +36,21 @@
         </div>
     </div>
 
-    <dialog class="hidden" id="edit-window" open="" >
+    <dialog class="hidden" id="edit-window" open="">
         <h3>Изменить тикет</h3>
         <label class="window-descr-short">
-            <h4>Краткое описание</h4>
+            <div class="shortDescr-status-wrapper">
+                <h4>Краткое описание</h4>
+                Текущий статус:<div class="status-dd dropdown">
+                    <span></span>
+                    <div class="dropdown-content">
+                        <p>Новое</p>
+                        <p>В работе</p>
+                        <p>Завершено</p>
+                        <p>Отклонено</p>
+                    </div>
+                </div>
+            </div>
             <textarea class="task-short-content"> </textarea>
         </label>
 

@@ -41,6 +41,10 @@ export default class UIController {
             const elemTask = document.getElementById('edit-window');
             elemTask.style.display = 'flex';
 
+            const statusElem = document.getElementsByClassName('status-dd ')[0].firstChild;
+            const respondedStatus = UIController.map.get(index).status
+            statusElem.textContent = TaskStatusHandler.parseStatus(respondedStatus);
+
         })
     }
 
