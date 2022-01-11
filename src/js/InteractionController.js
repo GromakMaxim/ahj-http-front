@@ -14,7 +14,6 @@ export default class InteractionController {
     }
 
 
-
     setEditButtons() {
         const editBtns = Array.from(document.getElementsByClassName('edit'));
         editBtns.forEach(btn => InteractionController.setEdit(btn));

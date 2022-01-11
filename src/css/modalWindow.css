@@ -44,24 +44,24 @@
     margin-right: 150px;
 }
 
-.window-descr-short h4, .window-descr-long h4{
+.window-descr-short h4, .window-descr-long h4 {
     margin-bottom: 2%;
 }
 
-.shortDescr-status-wrapper{
+.shortDescr-status-wrapper {
     display: flex;
     flex-direction: row;
 }
 
-.shortDescr-status-wrapper h4{
+.shortDescr-status-wrapper h4 {
     margin-right: 50px;
 }
 
-.status-dd{
+.status-dd {
     margin-left: 5px;
 }
 
-#edit-window{
+#edit-window {
     display: none;
 }
 

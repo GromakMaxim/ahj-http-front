@@ -4,6 +4,7 @@ import DateHandler from "./DateHandler";
 
 export default class UIController {
     static map = new Map();
+
     constructor() {
         this.api = new RequestSender();
         this.api.getAllTasks()
@@ -15,15 +16,6 @@ export default class UIController {
                     this.setCancelModal();
                 }
             )
-    }
-
-    setOpenTaskFunction() {
-        const clickableAreas = Array.from(document.getElementsByClassName('task'));
-        clickableAreas.forEach(elem => UIController.setShowFullTask(elem));
-    }
-
-    fillMap(tasks) {
-        tasks.forEach(task => UIController.map.set(task.id, task));
     }
 
     static setShowFullTask(task) {
@@ -46,6 +38,15 @@ export default class UIController {
             statusElem.textContent = TaskStatusHandler.parseStatus(respondedStatus);
 
         })
+    }
+
+    setOpenTaskFunction() {
+        const clickableAreas = Array.from(document.getElementsByClassName('task'));
+        clickableAreas.forEach(elem => UIController.setShowFullTask(elem));
+    }
+
+    fillMap(tasks) {
+        tasks.forEach(task => UIController.map.set(task.id, task));
     }
 
     showAllTickets(tasks) {
@@ -111,9 +112,9 @@ export default class UIController {
         return wrapper;
     }
 
-    setCancelModal(){
+    setCancelModal() {
         const cancel = document.getElementById('exit');
-        cancel.addEventListener('click', (event)=>{
+        cancel.addEventListener('click', (event) => {
             event.preventDefault();
 
             const elemTask = document.getElementById('edit-window');
