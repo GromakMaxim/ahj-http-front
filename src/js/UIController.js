@@ -14,8 +14,22 @@ export default class UIController {
                     this.fillMap(result);
                     this.setOpenTaskFunction();
                     this.setCancelModal();
+                    this.setModalWinPopupInteraction();
                 }
             )
+    }
+
+    setModalWinPopupInteraction(){
+        const ddStatus = document.getElementsByClassName('status-dd dropdown')[0].firstChild;
+        const ddOptions = document.getElementsByClassName('dropdown-content')[0].childNodes;
+
+        ddOptions.forEach(option=>{
+            option.addEventListener('click', (event)=>{
+                event.preventDefault();
+                ddStatus.textContent = option.textContent;
+            })
+        })
+
     }
 
     static setShowFullTask(task) {
