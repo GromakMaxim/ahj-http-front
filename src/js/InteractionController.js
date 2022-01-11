@@ -13,13 +13,7 @@ export default class InteractionController {
         })
     }
 
-    static setShowFullTask(task){
-        task.addEventListener('click', (event) => {
-            event.preventDefault();
 
-            console.log('clicked! ' + task.id)
-        })
-    }
 
     setEditButtons() {
         const editBtns = Array.from(document.getElementsByClassName('edit'));
@@ -28,11 +22,6 @@ export default class InteractionController {
 
     setDeleteButtons() {
 
-    }
-
-    setOpenTaskFunction() {
-        const clickableAreas = Array.from(document.getElementsByClassName('task'));
-        clickableAreas.forEach(elem=>InteractionController.setShowFullTask(elem));
     }
 
     setCloseTaskFunction() {

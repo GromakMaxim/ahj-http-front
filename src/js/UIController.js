@@ -1,30 +1,55 @@
 import RequestSender from "./RequestSender";
 import TaskStatusHandler from "./TaskStatusHandler";
 import DateHandler from "./DateHandler";
-import InteractionController from "./InteractionController";
 
 export default class UIController {
-
+    static map = new Map();
     constructor() {
-        this.interaction = new InteractionController();
         this.api = new RequestSender();
         this.api.getAllTasks()
             .then(
                 result => {
                     this.showAllTickets(result);
-                    this.interaction.setOpenTaskFunction();
+                    this.fillMap(result);
+                    this.setOpenTaskFunction();
                 }
             )
     }
 
+    setOpenTaskFunction() {
+        const clickableAreas = Array.from(document.getElementsByClassName('task'));
+        clickableAreas.forEach(elem => UIController.setShowFullTask(elem));
+    }
+
+    fillMap(tasks) {
+        tasks.forEach(task => UIController.map.set(task.id, task));
+    }
+
+    static setShowFullTask(task) {
+        task.addEventListener('click', (event) => {
+            event.preventDefault();
+            let index = +task.id;
+
+            const contentModalWindowShortDescr = document.getElementsByClassName('task-short-content')[0];
+            contentModalWindowShortDescr.value = UIController.map.get(index).shortDescription;
+
+            const contentModalWindowFullDescr = document.getElementsByClassName('task-content')[0];
+            contentModalWindowFullDescr.value = UIController.map.get(index).description;
+
+
+            const elemTask = document.getElementById('edit-window');
+            elemTask.style.display = 'flex';
+
+        })
+    }
 
     showAllTickets(tasks) {
-        console.log(tasks)
         const widget = document.getElementsByClassName('widget')[0];
         for (let taskData of tasks) {
             const elem = this.buildTask(taskData);
             widget.append(elem);
         }
+
     }
 
     buildTask(taskData) {
