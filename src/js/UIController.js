@@ -12,6 +12,7 @@ export default class UIController {
                     this.showAllTickets(result);
                     this.fillMap(result);
                     this.setOpenTaskFunction();
+                    this.setCancelModal();
                 }
             )
     }
@@ -104,5 +105,16 @@ export default class UIController {
         wrapper.append(buttons);
 
         return wrapper;
+    }
+
+    setCancelModal(){
+        const cancel = document.getElementById('exit');
+        cancel.addEventListener('click', (event)=>{
+            event.preventDefault();
+
+            const elemTask = document.getElementById('edit-window');
+            elemTask.style.display = 'none';
+
+        })
     }
 }
