@@ -1,0 +1,19 @@
+.left-side{
+    width: 70%;
+    margin-left: 5%;
+}
+
+.task-short-content {
+    width: 90%;
+    height: 50px;
+    resize: none;
+    margin-bottom: 20px;
+    padding: 5px;
+}
+
+.task-content {
+    width: 90%;
+    height: 200px;
+    resize: vertical;
+    padding: 5px;
+}

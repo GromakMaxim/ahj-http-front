@@ -20,3 +20,12 @@
     height: 30px;
     margin: auto;
 }
+
+.status-pic {
+    background-image: url("../pics/new.png");
+    background-size: 30px auto;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    margin: auto;
+}

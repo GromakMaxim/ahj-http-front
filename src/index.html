@@ -37,30 +37,46 @@
     </div>
 
     <dialog class="hidden" id="edit-window" open="">
-        <h3>Изменить тикет</h3>
-        <label class="window-descr-short">
-            <div class="shortDescr-status-wrapper">
-                <h4>Краткое описание</h4>
-                Текущий статус:
-                <div class="status-dd dropdown">
-                    <span></span>
-                    <div class="dropdown-content">
-                        <p>Новое</p>
-                        <p>В работе</p>
-                        <p>Завершено</p>
-                        <p>Отклонено</p>
+        <div class="modal-main">
+            <div class="left-side">
+                <h3>Изменить тикет</h3>
+                <label class="window-descr-short">
+                    <h4>Краткое описание</h4>
+                    <textarea class="task-short-content"> </textarea>
+                </label>
+
+                <label class="window-descr-long">
+                    <h4>Полное описание</h4>
+                    <textarea class="task-content"> </textarea>
+                </label>
+            </div>
+
+            <div class="right-side">
+                <div class="status-line">
+                    <div class="status-info">
+
+                        <span>Текущий статус: </span>
+                        <div class="status-dd dropdown">
+                        </div>
+                        <span></span>
+                        <div class="dropdown-content">
+                            <p>Новое</p>
+                            <p>В работе</p>
+                            <p>Завершено</p>
+                            <p>Отклонено</p>
+                        </div>
                     </div>
+
+                    <div class="status-pic"></div>
+                </div>
+                <div class="date-section">
+                    <span>Начало: </span> <input class="input-start-at" type="date">
+                    <span>Заверш: </span> <input class="input-estimate" type="date">
                 </div>
             </div>
-            <textarea class="task-short-content"> </textarea>
-        </label>
+        </div>
 
-        <label class="window-descr-long">
-            <h4>Полное описание</h4>
-            <textarea class="task-content"> </textarea>
-        </label>
 
-        <p></p>
         <div class="modal-buttons">
             <button id="confirm-task-changes">Применить</button>
             <button id="exit">Отмена</button>

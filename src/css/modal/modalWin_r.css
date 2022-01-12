@@ -1,0 +1,18 @@
+.right-side{
+    width: 30%;
+}
+
+.status-dd {
+    margin-left: 5px;
+}
+
+.status-line{
+    display: flex;
+    flex-direction: row;
+    margin-top: 7%;
+    margin-bottom: 10%;
+}
+
+.input-start-at{
+    margin-bottom: 10px;
+}
