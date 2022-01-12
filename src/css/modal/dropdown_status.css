@@ -12,4 +12,9 @@
 
 .status-line:hover .dropdown-content {
     display: block;
+    cursor: pointer;
+}
+
+.status-dd:hover{
+    cursor: pointer;
 }
