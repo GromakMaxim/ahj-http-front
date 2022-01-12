@@ -19,14 +19,34 @@ export default class UIController {
             )
     }
 
-    setModalWinPopupInteraction(){
+    setModalWinPopupInteraction() {
         const ddStatus = document.getElementsByClassName('status-dd dropdown')[0].firstChild;
         const ddOptions = document.getElementsByClassName('dropdown-content')[0].childNodes;
 
-        ddOptions.forEach(option=>{
-            option.addEventListener('click', (event)=>{
+        ddOptions.forEach(option => {
+            option.addEventListener('click', (event) => {
                 event.preventDefault();
                 ddStatus.textContent = option.textContent;
+
+                const statusPicElem = document.getElementsByClassName('status-pic')[0];
+                switch (ddStatus.textContent) {
+                    case "Новое": {
+                        statusPicElem.style.backgroundImage = TaskStatusHandler.getStatusPicURL(0);
+                        break;
+                    }
+                    case "В работе": {
+                        statusPicElem.style.backgroundImage = TaskStatusHandler.getStatusPicURL(1);
+                        break;
+                    }
+                    case "Завершено": {
+                        statusPicElem.style.backgroundImage = TaskStatusHandler.getStatusPicURL(2);
+                        break;
+                    }
+                    case "Отклонено":{
+                        statusPicElem.style.backgroundImage = TaskStatusHandler.getStatusPicURL(3);
+                        break;
+                    }
+                }
             })
         })
 
@@ -51,6 +71,8 @@ export default class UIController {
             const respondedStatus = UIController.map.get(index).status
             statusElem.textContent = TaskStatusHandler.parseStatus(respondedStatus);
 
+            const statusPicElem = document.getElementsByClassName('status-pic')[0];
+            statusPicElem.style.backgroundImage = TaskStatusHandler.getStatusPicURL(respondedStatus);
         })
     }
 
