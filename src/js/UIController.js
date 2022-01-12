@@ -48,8 +48,7 @@ export default class UIController {
                     }
                 }
             })
-        })
-
+        });
     }
 
     static setShowFullTask(task) {
@@ -68,11 +67,17 @@ export default class UIController {
             elemTask.style.display = 'flex';
 
             const statusElem = document.getElementsByClassName('status-dd ')[0].firstChild;
-            const respondedStatus = UIController.map.get(index).status
+            const respondedStatus = UIController.map.get(index).status;
             statusElem.textContent = TaskStatusHandler.parseStatus(respondedStatus);
 
             const statusPicElem = document.getElementsByClassName('status-pic')[0];
             statusPicElem.style.backgroundImage = TaskStatusHandler.getStatusPicURL(respondedStatus);
+
+            const dateStartElem = document.getElementsByClassName('input-start-at')[0];
+            dateStartElem.value = DateHandler.getDate(UIController.map.get(index).creationDate, "yyyy-MM-dd")
+
+            const dateEstimateElem = document.getElementsByClassName('input-estimate')[0];
+            dateEstimateElem.value = DateHandler.getDate(UIController.map.get(index).closingDate, "yyyy-MM-dd");
         })
     }
 

@@ -6,4 +6,9 @@ export default class DateHandler {
         return format(date, 'dd.MM.yyyy');
     }
 
+    static getDate(str, style) {
+        let date = new Date(str.split(".")[2], str.split(".")[1], str.split(".")[0]);
+        return format(date, style);
+    }
+
 }
