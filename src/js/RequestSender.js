@@ -20,4 +20,17 @@ export default class RequestSender {
             return null;
         }
     }
+
+    async saveTask(taskData) {
+        const endpoint = '?method=createTicket';
+        let response = await fetch(this.baseUrl + endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(taskData)
+        });
+
+        let result = await response.json();
+    }
 }

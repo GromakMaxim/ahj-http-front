@@ -4,10 +4,11 @@ import DateHandler from "./DateHandler";
 
 export default class UIController {
     static map = new Map();
+    static api = new RequestSender();
 
     constructor() {
-        this.api = new RequestSender();
-        this.api.getAllTasks()
+        UIController.api = new RequestSender();
+        UIController.api.getAllTasks()
             .then(
                 result => {
                     this.showAllTickets(result);
@@ -15,9 +16,68 @@ export default class UIController {
                     this.setOpenTaskFunction();
                     this.setCancelModal();
                     this.setModalWinPopupInteraction();
+                    this.setEditButtons();
+                    this.setApplyChangesButton();
                 }
             )
     }
+
+
+    setApplyChangesButton() {
+        const acceptBtn = document.getElementById('confirm-task-changes');
+        acceptBtn.addEventListener('click', (event) => {
+            const short = document.getElementsByClassName('task-short-content')[0].value;
+            const long = document.getElementsByClassName('task-content')[0].value;
+            let status = document.getElementsByClassName('status-dd')[0].textContent;
+            switch (status) {
+                case "Новое": {
+                    status = 0;
+                    break;
+                }
+                case "В работе": {
+                    status = 1;
+                    break;
+                }
+                case "Завершено": {
+                    status = 2;
+                    break;
+                }
+                case "Отклонено": {
+                    status = 3;
+                    break;
+                }
+            }
+            console.log(document.getElementsByClassName('input-start-at')[0].value)
+            const date1 = DateHandler.setMMDDYYYYFormat(document.getElementsByClassName('input-start-at')[0].value, "-");
+            const date2 = DateHandler.setMMDDYYYYFormat(document.getElementsByClassName('input-estimate')[0].value, "-");
+
+            const selectedId = document.getElementsByClassName('task-short-content')[0].id;
+            let requestData = {
+                "shortDescription": short,
+                "description": long,
+                "creationDate": date1,
+                "status": status,
+                "closingDate": date2,
+                "isHidden": false,
+                "id": parseInt(selectedId)
+            }
+
+            UIController.api.saveTask(requestData).then(r => console.log(r));
+        });
+    }
+
+    setEditButtons() {
+        const editBtns = Array.from(document.getElementsByClassName('edit'));
+        editBtns.forEach(btn => UIController.setEdit(btn));
+    }
+
+    static setEdit(btn) {
+        btn.addEventListener('click', (event) => {
+            event.preventDefault();
+
+        })
+    }
+
 
     setModalWinPopupInteraction() {
         const ddStatus = document.getElementsByClassName('status-dd dropdown')[0].firstChild;
@@ -42,7 +102,7 @@ export default class UIController {
                         statusPicElem.style.backgroundImage = TaskStatusHandler.getStatusPicURL(2);
                         break;
                     }
-                    case "Отклонено":{
+                    case "Отклонено": {
                         statusPicElem.style.backgroundImage = TaskStatusHandler.getStatusPicURL(3);
                         break;
                     }
@@ -54,10 +114,12 @@ export default class UIController {
     static setShowFullTask(task) {
         task.addEventListener('click', (event) => {
             event.preventDefault();
-            let index = +task.id;
-
+            let index = parseInt(task.id);
+            console.log(index)
+            console.log(UIController.map)
             const contentModalWindowShortDescr = document.getElementsByClassName('task-short-content')[0];
             contentModalWindowShortDescr.value = UIController.map.get(index).shortDescription;
+            contentModalWindowShortDescr.id = task.id;
 
             const contentModalWindowFullDescr = document.getElementsByClassName('task-content')[0];
             contentModalWindowFullDescr.value = UIController.map.get(index).description;
@@ -74,10 +136,10 @@ export default class UIController {
             statusPicElem.style.backgroundImage = TaskStatusHandler.getStatusPicURL(respondedStatus);
 
             const dateStartElem = document.getElementsByClassName('input-start-at')[0];
-            dateStartElem.value = DateHandler.getDate(UIController.map.get(index).creationDate, "yyyy-MM-dd")
+            dateStartElem.value = DateHandler.getDate(UIController.map.get(index).creationDate, "yyyy-MM-dd", ".")
 
             const dateEstimateElem = document.getElementsByClassName('input-estimate')[0];
-            dateEstimateElem.value = DateHandler.getDate(UIController.map.get(index).closingDate, "yyyy-MM-dd");
+            dateEstimateElem.value = DateHandler.getDate(UIController.map.get(index).closingDate, "yyyy-MM-dd", ".");
         })
     }
 
@@ -91,6 +153,7 @@ export default class UIController {
     }
 
     showAllTickets(tasks) {
+        console.log(tasks)
         const widget = document.getElementsByClassName('widget')[0];
         for (let taskData of tasks) {
             const elem = this.buildTask(taskData);
