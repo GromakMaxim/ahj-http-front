@@ -62,6 +62,7 @@ export default class UIController {
                 "id": parseInt(selectedId)
             }
 
+            UIController.map.set(selectedId, requestData);
             UIController.api.saveTask(requestData).then(r => console.log(r));
         });
     }
@@ -148,14 +149,14 @@ export default class UIController {
         clickableAreas.forEach(elem => UIController.setShowFullTask(elem));
     }
 
-    fillMap(tasks) {
-        tasks.forEach(task => UIController.map.set(task.id, task));
+    fillMap(array) {
+        array.tasks.forEach(task => UIController.map.set(task.id, task));
     }
 
-    showAllTickets(tasks) {
-        console.log(tasks)
+    showAllTickets(array) {
         const widget = document.getElementsByClassName('widget')[0];
-        for (let taskData of tasks) {
+        for (let taskData of array.tasks) {
+            console.log(taskData)
             const elem = this.buildTask(taskData);
             widget.append(elem);
         }
