@@ -17,7 +17,6 @@ export default class DateHandler {
     }
 
     static setMMDDYYYYFormat(str, delimiter) {
-        console.log(str)
         str = str.split(delimiter)[2]+"."+str.split(delimiter)[1] +"." + str.split(delimiter)[0];
         return str;
     }

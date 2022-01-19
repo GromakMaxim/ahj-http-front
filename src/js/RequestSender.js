@@ -1,5 +1,6 @@
 export default class RequestSender {
-    baseUrl = 'https://netology-http.herokuapp.com/';
+    //baseUrl = 'https://netology-http.herokuapp.com/';
+    baseUrl = 'http://localhost:8888/'
 
     async getTaskById(id) {
         const endpoint = '?method=ticketById&id=';
@@ -21,16 +22,22 @@ export default class RequestSender {
         }
     }
 
-    async saveTask(taskData) {
+    async saveTask(task) {
         const endpoint = '?method=createTicket';
         let response = await fetch(this.baseUrl + endpoint, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
-            body: JSON.stringify(taskData)
+            body: JSON.stringify(task)
         });
 
-        let result = await response.json();
+        if (response.ok) {
+            let result = await response.json();
+            console.log(result);
+            return result;
+        } else {
+            return null;
+        }
     }
 }

@@ -18,14 +18,24 @@ export default class UIController {
                     this.setModalWinPopupInteraction();
                     this.setEditButtons();
                     this.setApplyChangesButton();
-                }
+                },
             )
+    }
+
+    async refreshTaskList(tasks) {
+        let tasksToRemove = Array.from(document.getElementsByClassName('task-wrapper'));
+        tasksToRemove.forEach(elem => {
+            elem.parentNode.removeChild(elem);
+        });
+
+        await this.showAllTickets(tasks);
+        this.setOpenTaskFunction();
     }
 
 
     setApplyChangesButton() {
         const acceptBtn = document.getElementById('confirm-task-changes');
-        acceptBtn.addEventListener('click', (event) => {
+        acceptBtn.addEventListener('click', async (event) => {
             const short = document.getElementsByClassName('task-short-content')[0].value;
             const long = document.getElementsByClassName('task-content')[0].value;
             let status = document.getElementsByClassName('status-dd')[0].textContent;
@@ -47,7 +57,7 @@ export default class UIController {
                     break;
                 }
             }
-            console.log(document.getElementsByClassName('input-start-at')[0].value)
+
             const date1 = DateHandler.setMMDDYYYYFormat(document.getElementsByClassName('input-start-at')[0].value, "-");
             const date2 = DateHandler.setMMDDYYYYFormat(document.getElementsByClassName('input-estimate')[0].value, "-");
 
@@ -62,8 +72,16 @@ export default class UIController {
                 "id": parseInt(selectedId)
             }
 
-            UIController.map.set(selectedId, requestData);
-            UIController.api.saveTask(requestData).then(r => console.log(r));
+            console.log(requestData)
+            const result = await UIController.api.saveTask(requestData);
+            result.tasks.forEach(task => {
+                UIController.map.set(parseInt(task.id), task);
+            })
+            console.log(result)
+            await this.refreshTaskList(result);
+
+            const elemTask = document.getElementById('edit-window');
+            elemTask.style.display = 'none';
         });
     }
 
@@ -116,8 +134,6 @@ export default class UIController {
         task.addEventListener('click', (event) => {
             event.preventDefault();
             let index = parseInt(task.id);
-            console.log(index)
-            console.log(UIController.map)
             const contentModalWindowShortDescr = document.getElementsByClassName('task-short-content')[0];
             contentModalWindowShortDescr.value = UIController.map.get(index).shortDescription;
             contentModalWindowShortDescr.id = task.id;
@@ -153,14 +169,18 @@ export default class UIController {
         array.tasks.forEach(task => UIController.map.set(task.id, task));
     }
 
-    showAllTickets(array) {
-        const widget = document.getElementsByClassName('widget')[0];
-        for (let taskData of array.tasks) {
-            console.log(taskData)
-            const elem = this.buildTask(taskData);
-            widget.append(elem);
+    async showAllTickets(array) {
+        if (array.error !== undefined) {
+            document.getElementsByClassName('widget')[0].textContent = 'https://getpantry.cloud/ responsed: "Too many requests in this time frame." Please try again later'
+            return false;
+        } else {
+            const widget = document.getElementsByClassName('widget')[0];
+            for (let taskData of array.tasks) {
+                const elem = this.buildTask(taskData);
+                widget.append(elem);
+            }
+            return true;
         }
-
     }
 
     buildTask(taskData) {
