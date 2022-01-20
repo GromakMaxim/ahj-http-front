@@ -1,6 +1,6 @@
 export default class RequestSender {
-    //baseUrl = 'https://netology-http.herokuapp.com/';
-    baseUrl = 'http://localhost:8888/'
+    baseUrl = 'https://netology-http.herokuapp.com/';
+    // baseUrl = 'http://localhost:8888/'
 
     async getTaskById(id) {
         const endpoint = '?method=ticketById&id=';
