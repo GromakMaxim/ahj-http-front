@@ -302,10 +302,12 @@ export default class UIController {
 
     setAddNewTask() {
         const btn = document.getElementsByClassName('add-new-task')[0];
+        console.log(btn)
         btn.addEventListener('click', (event) => {
             event.preventDefault();
 
             const contentModalWindowShortDescr = document.getElementsByClassName('task-short-content')[0];
+            console.log(contentModalWindowShortDescr)
             contentModalWindowShortDescr.value = "";
 
             let max = 0;
@@ -317,16 +319,19 @@ export default class UIController {
             contentModalWindowShortDescr.id = max;
 
             const contentModalWindowFullDescr = document.getElementsByClassName('task-content')[0];
+            console.log(contentModalWindowFullDescr)
             contentModalWindowFullDescr.value = "";
 
-            const statusElem = document.getElementsByClassName('status-dd ')[0].firstChild;
+            const statusElem = document.getElementsByClassName('status-dd');
             const respondedStatus = 0;
             statusElem.textContent = TaskStatusHandler.parseStatus(respondedStatus);
 
             const statusPicElem = document.getElementsByClassName('status-pic')[0];
+            console.log(statusPicElem)
             statusPicElem.style.backgroundImage = TaskStatusHandler.getStatusPicURL(respondedStatus);
 
             const dateStartElem = document.getElementsByClassName('input-start-at')[0];
+            console.log(dateStartElem)
             dateStartElem.value = DateHandler.getTodayDateInString();
 
             const dateEstimateElem = document.getElementsByClassName('input-estimate')[0];
