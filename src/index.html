@@ -5,62 +5,67 @@
     <title>Service desk widget</title>
 </head>
 <body>
-<div class="widget">
-    <dialog class="hidden" id="edit-window" open="">
-        <div class="modal-main">
-            <div class="left-side">
-                <h3>Изменить тикет</h3>
-                <label class="window-descr-short">
-                    <h4>Краткое описание</h4>
-                    <textarea class="task-short-content"> </textarea>
-                </label>
+<div class="widget-wrapper">
+    <div class="widget">
+        <dialog class="hidden" id="edit-window" open="">
+            <div class="modal-main">
+                <div class="left-side">
+                    <h3>Изменить тикет</h3>
+                    <label class="window-descr-short">
+                        <h4>Краткое описание</h4>
+                        <textarea class="task-short-content"> </textarea>
+                    </label>
 
-                <label class="window-descr-long">
-                    <h4>Полное описание</h4>
-                    <textarea class="task-content"> </textarea>
-                </label>
-            </div>
+                    <label class="window-descr-long">
+                        <h4>Полное описание</h4>
+                        <textarea class="task-content"> </textarea>
+                    </label>
+                </div>
 
-            <div class="right-side">
-                <div class="status-line">
-                    <div class="status-info">
+                <div class="right-side">
+                    <div class="status-line">
+                        <div class="status-info">
 
-                        <span>Текущий статус: </span>
-                        <div class="status-dd dropdown">
+                            <span>Текущий статус: </span>
+                            <div class="status-dd dropdown">
+                            </div>
+                            <span></span>
+                            <div class="dropdown-content">
+                                <p>Новое</p>
+                                <p>В работе</p>
+                                <p>Завершено</p>
+                                <p>Отклонено</p>
+                            </div>
                         </div>
-                        <span></span>
-                        <div class="dropdown-content">
-                            <p>Новое</p>
-                            <p>В работе</p>
-                            <p>Завершено</p>
-                            <p>Отклонено</p>
-                        </div>
+
+                        <div class="status-pic"></div>
                     </div>
-
-                    <div class="status-pic"></div>
-                </div>
-                <div class="date-section">
-                    <span>Начало: </span>
-                    <label>
-                        <input class="input-start-at" type="date">
-                    </label>
-                    <span>Заверш: </span>
-                    <label>
-                        <input class="input-estimate" type="date">
-                    </label>
+                    <div class="date-section">
+                        <span>Начало: </span>
+                        <label>
+                            <input class="input-start-at" type="date">
+                        </label>
+                        <span>Заверш: </span>
+                        <label>
+                            <input class="input-estimate" type="date">
+                        </label>
+                    </div>
                 </div>
             </div>
-        </div>
 
 
-        <div class="modal-buttons">
-            <button id="confirm-task-changes">Применить</button>
-            <button id="exit">Отмена</button>
-        </div>
+            <div class="modal-buttons">
+                <button id="confirm-task-changes">Применить</button>
+                <button id="exit">Отмена</button>
+            </div>
 
-    </dialog>
+        </dialog>
 
 
+    </div>
+    <div class="add-new-task">
+
+    </div>
 </div>
 </body>
 </html>

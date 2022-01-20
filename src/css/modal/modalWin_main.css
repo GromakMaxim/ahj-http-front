@@ -45,9 +45,16 @@
     margin-right: 10px;
 }
 
-
-
 #edit-window {
     display: none;
 }
 
+.add-new-task {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.widget-wrapper{
+    display: flex;
+    flex-direction: row;
+}

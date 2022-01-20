@@ -10,7 +10,11 @@
     background-image: url("../pics/delete_b.png");
 }
 
-.task:hover, .delete:hover, .edit:hover {
+.add-new-task:hover {
+    background-image: url("../pics/add_b.png");
+}
+
+.task:hover, .delete:hover, .edit:hover, .add-new-task:hover {
     cursor: pointer;
 }
 
