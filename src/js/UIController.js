@@ -18,6 +18,7 @@ export default class UIController {
                     this.setModalWinPopupInteraction();
                     this.setEditButtons();
                     this.setApplyChangesButton();
+                    this.setAddNewTask();
                 },
             )
     }
@@ -245,6 +246,43 @@ export default class UIController {
             const elemTask = document.getElementById('edit-window');
             elemTask.style.display = 'none';
 
+        })
+    }
+
+    setAddNewTask() {
+        const btn = document.getElementsByClassName('add-new-task')[0];
+        btn.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            const contentModalWindowShortDescr = document.getElementsByClassName('task-short-content')[0];
+            contentModalWindowShortDescr.value = "";
+
+            let max = 0;
+            for (let task of UIController.map.values()) {
+                if (task.id >= max) max = task.id;
+            }
+            max++;
+
+            contentModalWindowShortDescr.id = max;
+
+            const contentModalWindowFullDescr = document.getElementsByClassName('task-content')[0];
+            contentModalWindowFullDescr.value = "";
+
+            const statusElem = document.getElementsByClassName('status-dd ')[0].firstChild;
+            const respondedStatus = 0;
+            statusElem.textContent = TaskStatusHandler.parseStatus(respondedStatus);
+
+            const statusPicElem = document.getElementsByClassName('status-pic')[0];
+            statusPicElem.style.backgroundImage = TaskStatusHandler.getStatusPicURL(respondedStatus);
+
+            const dateStartElem = document.getElementsByClassName('input-start-at')[0];
+            dateStartElem.value = DateHandler.getTodayDateInString();
+
+            const dateEstimateElem = document.getElementsByClassName('input-estimate')[0];
+            dateEstimateElem.value = DateHandler.getTodayDateInString()
+
+            const elemTask = document.getElementById('edit-window');
+            elemTask.style.display = 'flex';
         })
     }
 }

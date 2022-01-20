@@ -21,4 +21,8 @@ export default class DateHandler {
         return str;
     }
 
+    static getTodayDateInString(){
+        return format(new Date(),'yyyy-MM-dd');
+    }
+
 }
