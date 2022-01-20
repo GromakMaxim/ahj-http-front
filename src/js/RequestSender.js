@@ -40,4 +40,29 @@ export default class RequestSender {
             return null;
         }
     }
+
+    async deleteTaskById(taskId) {
+        console.log('need to delete: ' + taskId);
+        let json = {
+            "id": parseInt(taskId)
+        };
+
+        const endpoint = '?method=deleteTicket';
+        let response = await fetch(this.baseUrl + endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(json)
+        });
+
+        if (response.ok) {
+            let result = await response.json();
+            console.log('responsed content:');
+            console.log(result)
+            return result;
+        } else {
+            return null;
+        }
+    }
 }

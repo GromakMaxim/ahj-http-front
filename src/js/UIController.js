@@ -19,8 +19,27 @@ export default class UIController {
                     this.setEditButtons();
                     this.setApplyChangesButton();
                     this.setAddNewTask();
+                    this.setDeleteButtons();
                 },
             )
+    }
+
+    async setDeleteButtons() {
+        const deleteBtns = Array.from(document.getElementsByClassName('delete'));
+        deleteBtns.forEach(elem => this.setDeleteButton(elem));
+    }
+
+    async setDeleteButton(elem) {
+        elem.addEventListener('click', async (event) => {
+            event.preventDefault();
+
+            const taskId = elem.parentNode.parentNode.firstChild.id;
+
+            const response = await UIController.api.deleteTaskById(taskId);
+            if (response !== null) {
+                await this.refreshTaskList(response.tasks);
+            }
+        })
     }
 
     async refreshTaskList(tasks) {
@@ -95,6 +114,33 @@ export default class UIController {
         btn.addEventListener('click', (event) => {
             event.preventDefault();
 
+            const elem = btn.parentNode.parentNode.firstChild;
+            const taskContent = UIController.map.get(parseInt(elem.id));
+
+            let index = parseInt(taskContent.id);
+            const contentModalWindowShortDescr = document.getElementsByClassName('task-short-content')[0];
+            contentModalWindowShortDescr.value = UIController.map.get(index).shortDescription;
+            contentModalWindowShortDescr.id = taskContent.id;
+
+            const contentModalWindowFullDescr = document.getElementsByClassName('task-content')[0];
+            contentModalWindowFullDescr.value = UIController.map.get(index).description;
+
+
+            const elemTask = document.getElementById('edit-window');
+            elemTask.style.display = 'flex';
+
+            const statusElem = document.getElementsByClassName('status-dd ')[0].firstChild;
+            const respondedStatus = UIController.map.get(index).status;
+            statusElem.textContent = TaskStatusHandler.parseStatus(respondedStatus);
+
+            const statusPicElem = document.getElementsByClassName('status-pic')[0];
+            statusPicElem.style.backgroundImage = TaskStatusHandler.getStatusPicURL(respondedStatus);
+
+            const dateStartElem = document.getElementsByClassName('input-start-at')[0];
+            dateStartElem.value = DateHandler.getDate(UIController.map.get(index).creationDate, "yyyy-MM-dd", ".")
+
+            const dateEstimateElem = document.getElementsByClassName('input-estimate')[0];
+            dateEstimateElem.value = DateHandler.getDate(UIController.map.get(index).closingDate, "yyyy-MM-dd", ".");
         })
     }
 
@@ -171,17 +217,22 @@ export default class UIController {
     }
 
     async showAllTickets(array) {
-        if (array.error !== undefined) {
-            document.getElementsByClassName('widget')[0].textContent = 'https://getpantry.cloud/ responsed: "Too many requests in this time frame." Please try again later'
-            return false;
+        const widget = document.getElementsByClassName('widget')[0];
+
+        if (array.tasks === undefined || array.tasks == null) {
+            for (let taskData of array) {
+                const elem = this.buildTask(taskData);
+                widget.append(elem);
+            }
         } else {
-            const widget = document.getElementsByClassName('widget')[0];
             for (let taskData of array.tasks) {
                 const elem = this.buildTask(taskData);
                 widget.append(elem);
             }
-            return true;
         }
+
+
+        return true;
     }
 
     buildTask(taskData) {
