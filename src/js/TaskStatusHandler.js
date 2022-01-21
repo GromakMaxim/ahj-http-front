@@ -23,7 +23,7 @@ export default class TaskStatusHandler {
             case 2:
                 return "url('https://cdn-icons-png.flaticon.com/512/1442/1442912.png')";
             case 3:
-                return "url('https://cdn-icons.flaticon.com/png/512/1979/premium/1979288.png?token=exp=1642674961~hmac=539327f2387d236c9ba56c6a670e79c8')";
+                return "url('https://cdn-icons.flaticon.com/png/512/4303/premium/4303922.png?token=exp=1642758088~hmac=8c9b0b5a009d6f673f9825c91479b105')";
             default:
                 return "url('https://cdn-icons.flaticon.com/png/512/3112/premium/3112993.png?token=exp=1641983042~hmac=93f94e85e3ae4b1b182dadf835b06b6c')";
         }

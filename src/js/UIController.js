@@ -149,7 +149,7 @@ export default class UIController {
 
 
     setModalWinPopupInteraction() {
-        const ddStatus = document.getElementsByClassName('status-dd dropdown')[0].firstChild;
+        const ddStatus = document.getElementsByClassName('status-dd dropdown')[0];
         const ddOptions = document.getElementsByClassName('dropdown-content')[0].childNodes;
 
         ddOptions.forEach(option => {
@@ -195,7 +195,8 @@ export default class UIController {
             const elemTask = document.getElementById('edit-window');
             elemTask.style.display = 'flex';
 
-            const statusElem = document.getElementsByClassName('status-dd ')[0].firstChild;
+            const statusElem = document.getElementsByClassName('status-dd dropdown')[0];
+            console.log(statusElem)
             const respondedStatus = UIController.map.get(index).status;
             statusElem.textContent = TaskStatusHandler.parseStatus(respondedStatus);
 
@@ -299,7 +300,6 @@ export default class UIController {
 
             const elemTask = document.getElementById('edit-window');
             elemTask.style.display = 'none';
-
         })
     }
 
