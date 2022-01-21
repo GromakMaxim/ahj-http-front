@@ -49,6 +49,9 @@ export default class UIController {
         });
 
         await this.showAllTickets(tasks);
+        this.setEditButtons();
+        this.setDeleteButtons();
+
         this.setOpenTaskFunction();
     }
 
